@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>سِنان — منصة إدارة الأكاديميات الرياضية</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--primary:#2563EB;--primary-dark:#1D4ED8;--primary-light:#EFF6FF;--bg:#F8FAFC;--surface:#FFFFFF;--text:#0F172A;--muted:#64748B;--border:#E2E8F0;--green:#16A34A;--green-bg:#F0FDF4;--amber:#D97706;--amber-bg:#FFFBEB;--red:#DC2626;--red-bg:#FEF2F2;}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'Cairo',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.fadein{animation:fadeUp .7s ease both;}
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .6s ease,transform .6s ease;}
+.reveal.on{opacity:1;transform:none;}
+nav{position:fixed;inset:0 0 auto 0;z-index:300;background:rgba(248,250,252,.96);backdrop-filter:blur(14px);border-bottom:1px solid var(--border);padding:.85rem 5rem;display:flex;align-items:center;justify-content:space-between;}
+.nav-name{font-size:1.35rem;font-weight:900;color:var(--text);letter-spacing:-.5px;}
+.nav-links{display:flex;gap:2rem;list-style:none;}
+.nav-links a{color:var(--muted);text-decoration:none;font-size:.87rem;font-weight:600;transition:color .2s;}
+.nav-links a:hover{color:var(--primary);}
+.btn-cta{background:var(--primary);color:#fff;border:none;padding:.6rem 1.5rem;border-radius:8px;font-size:.88rem;font-weight:700;font-family:'Cairo',sans-serif;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:.4rem;transition:background .2s,transform .15s,box-shadow .2s;}
+.btn-cta:hover{background:var(--primary-dark);transform:translateY(-1px);box-shadow:0 6px 20px rgba(37,99,235,.3);}
+.btn-outline{background:transparent;color:var(--primary);border:1.5px solid var(--primary);padding:.75rem 1.8rem;border-radius:8px;font-size:.9rem;font-weight:700;font-family:'Cairo',sans-serif;cursor:pointer;transition:all .2s;}
+.btn-outline:hover{background:var(--primary-light);}
+.hero{min-height:100vh;display:grid;grid-template-columns:1.1fr 1fr;gap:4.5rem;align-items:center;padding:9rem 5rem 5rem;max-width:1220px;margin:0 auto;}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:.5rem;background:var(--primary-light);border:1px solid rgba(37,99,235,.2);color:var(--primary);padding:.3rem 1rem;border-radius:50px;font-size:.73rem;font-weight:700;letter-spacing:1px;margin-bottom:1.5rem;}
+.pulse{width:6px;height:6px;background:var(--primary);border-radius:50%;animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(1.6)}}
+.hero h1{font-size:clamp(2.4rem,4.5vw,3.7rem);font-weight:900;line-height:1.1;letter-spacing:-1.5px;margin-bottom:1.2rem;}
+.hero h1 em{font-style:normal;color:var(--primary);}
+.hero p{font-size:.96rem;color:var(--muted);line-height:1.9;margin-bottom:2rem;max-width:480px;}
+.hero-btns{display:flex;gap:1rem;margin-bottom:2rem;}
+.hero-tags{display:flex;flex-wrap:wrap;gap:.6rem;}
+.htag{font-size:.74rem;font-weight:600;color:var(--muted);background:var(--surface);border:1px solid var(--border);padding:.3rem .8rem;border-radius:50px;}
+.mock{background:var(--surface);border-radius:16px;border:1px solid var(--border);box-shadow:0 24px 60px rgba(15,23,42,.1);overflow:hidden;}
+.mock-top{background:var(--primary);padding:.9rem 1.3rem;display:flex;align-items:center;justify-content:space-between;}
+.mock-top span{color:#fff;font-size:.8rem;font-weight:700;}
+.wdots{display:flex;gap:4px;}
+.wd{width:8px;height:8px;border-radius:50%;}
+.mock-body{padding:1.3rem;}
+.m-lbl{font-size:.65rem;font-weight:700;letter-spacing:2px;color:var(--muted);text-transform:uppercase;margin-bottom:.8rem;}
+.m-rows{display:flex;flex-direction:column;gap:.55rem;}
+.m-row{display:flex;align-items:center;gap:.75rem;padding:.65rem .85rem;border-radius:8px;border:1px solid transparent;}
+.mr-g{background:var(--green-bg);border-color:#BBF7D0;}
+.mr-a{background:var(--amber-bg);border-color:#FDE68A;}
+.mr-r{background:var(--red-bg);border-color:#FECACA;}
+.mdot{width:7px;height:7px;border-radius:50%;flex-shrink:0;}
+.dg{background:var(--green);}.da{background:var(--amber);}.dr{background:var(--red);}
+.m-name{font-size:.79rem;font-weight:700;flex:1;}
+.m-sub{font-size:.67rem;color:var(--muted);}
+.m-badge{font-size:.63rem;font-weight:700;padding:.2rem .6rem;border-radius:50px;}
+.bg-g{background:#DCFCE7;color:var(--green);}
+.bg-a{background:#FEF3C7;color:#92400E;}
+.bg-r{background:#FEE2E2;color:var(--red);}
+.m-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:.55rem;margin-top:.85rem;}
+.ms{background:var(--bg);border-radius:8px;padding:.65rem;text-align:center;}
+.ms-n{font-size:1.35rem;font-weight:900;color:var(--primary);display:block;line-height:1;}
+.ms-l{font-size:.6rem;color:var(--muted);margin-top:2px;}
+.stats-strip{background:var(--text);padding:3.5rem 5rem;}
+.stats-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:0;}
+.stat{padding:0 2rem;border-left:1px solid rgba(255,255,255,.08);text-align:center;}
+.stat:last-child{border-right:1px solid rgba(255,255,255,.08);}
+.stat-n{font-size:2.5rem;font-weight:900;color:#60A5FA;display:block;line-height:1;margin-bottom:.35rem;}
+.stat-l{color:rgba(255,255,255,.55);font-size:.8rem;line-height:1.5;}
+.stat-s{color:rgba(255,255,255,.28);font-size:.63rem;margin-top:.3rem;}
+.sec{padding:6rem 5rem;max-width:1200px;margin:0 auto;}
+.sec-full{padding:6rem 5rem;}
+.sec-in{max-width:1200px;margin:0 auto;}
+.stag{font-size:.68rem;font-weight:700;letter-spacing:3px;color:var(--primary);text-transform:uppercase;margin-bottom:.6rem;}
+.stitle{font-size:clamp(1.8rem,3vw,2.5rem);font-weight:900;letter-spacing:-.5px;margin-bottom:.6rem;}
+.ssub{font-size:.9rem;color:var(--muted);line-height:1.8;margin-bottom:3rem;}
+.ctr{text-align:center;}
+.divider{height:1px;background:var(--border);}
+.feat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;}
+.feat{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.8rem;transition:transform .25s,border-color .25s,box-shadow .25s;}
+.feat:hover{transform:translateY(-4px);border-color:rgba(37,99,235,.25);box-shadow:0 12px 32px rgba(37,99,235,.08);}
+.feat-ic{width:42px;height:42px;background:var(--primary-light);border-radius:10px;display:flex;align-items:center;justify-content:center;margin-bottom:1rem;}
+.feat-ic svg{width:20px;height:20px;stroke:var(--primary);fill:none;stroke-width:2;}
+.feat h3{font-size:.94rem;font-weight:700;margin-bottom:.4rem;}
+.feat p{font-size:.79rem;color:var(--muted);line-height:1.8;}
+.aud-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;}
+.aud{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:2rem 1.5rem;transition:border-color .25s,transform .25s;}
+.aud:hover{border-color:var(--primary);transform:translateY(-3px);}
+.aud-bar{width:30px;height:3px;background:var(--primary);border-radius:2px;margin-bottom:1.2rem;}
+.aud h3{font-size:.95rem;font-weight:700;margin-bottom:.5rem;}
+.aud p{font-size:.79rem;color:var(--muted);line-height:1.8;}
+.login-sec{padding:6rem 5rem;background:linear-gradient(135deg,var(--primary-light) 0%,var(--bg) 60%);}
+.login-in{max-width:700px;margin:0 auto;text-align:center;}
+.login-in h2{font-size:1.9rem;font-weight:900;margin-bottom:.5rem;}
+.login-in>p{color:var(--muted);font-size:.9rem;margin-bottom:2.5rem;}
+.roles{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:1.5rem;}
+.role{background:var(--surface);border:2px solid var(--border);border-radius:12px;padding:1.4rem 1rem;cursor:pointer;transition:all .2s;text-align:center;}
+.role:hover,.role.sel{border-color:var(--primary);background:var(--primary-light);box-shadow:0 4px 16px rgba(37,99,235,.12);}
+.role-ic{width:44px;height:44px;background:var(--bg);border-radius:10px;margin:0 auto .75rem;display:flex;align-items:center;justify-content:center;}
+.role-ic svg{width:21px;height:21px;stroke:var(--primary);fill:none;stroke-width:1.8;}
+.role h4{font-size:.88rem;font-weight:700;}
+.role span{font-size:.72rem;color:var(--muted);display:block;margin-top:.15rem;}
+.lform-wrap{max-height:0;overflow:hidden;opacity:0;transition:max-height .4s ease,opacity .35s ease;}
+.lform-wrap.open{max-height:380px;opacity:1;}
+.lform{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.8rem;max-width:380px;margin:0 auto;text-align:right;}
+.fg{margin-bottom:.9rem;}
+.fg label{display:block;font-size:.8rem;font-weight:700;margin-bottom:.35rem;}
+.fg input{width:100%;padding:.65rem .9rem;border:1.5px solid var(--border);border-radius:8px;font-family:'Cairo',sans-serif;font-size:.87rem;color:var(--text);background:var(--bg);transition:border-color .2s;}
+.fg input:focus{outline:none;border-color:var(--primary);}
+.lhint{font-size:.7rem;color:var(--muted);margin-top:.65rem;text-align:center;}
+.lbtn{display:block;width:100%;padding:.78rem;margin-top:.4rem;text-align:center;background:var(--primary);color:#fff;border:none;border-radius:8px;font-size:.9rem;font-weight:700;font-family:'Cairo',sans-serif;cursor:pointer;text-decoration:none;transition:background .2s;}
+.lbtn:hover{background:var(--primary-dark);}
+footer{background:var(--text);padding:2rem 5rem;display:flex;justify-content:space-between;align-items:center;}
+.f-name{font-size:1.15rem;font-weight:900;color:#fff;}
+footer p{color:rgba(255,255,255,.35);font-size:.74rem;}
+@media(max-width:920px){
+  nav{padding:.8rem 1.5rem;}
+  .nav-links{display:none;}
+  .hero{grid-template-columns:1fr;padding:7rem 1.5rem 4rem;gap:2.5rem;}
+  .stats-strip{padding:3rem 1.5rem;}
+  .stats-inner{grid-template-columns:1fr 1fr;gap:2rem;}
+  .stat{border:none;padding:0;}
+  .sec{padding:4rem 1.5rem;}
+  .sec-full{padding:4rem 1.5rem;}
+  .feat-grid{grid-template-columns:1fr;}
+  .aud-grid{grid-template-columns:1fr;}
+  .roles{grid-template-columns:1fr;}
+  .login-sec{padding:4rem 1.5rem;}
+  footer{flex-direction:column;gap:.8rem;padding:2rem 1.5rem;text-align:center;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <ul class="nav-links">
+    <li><a href="#features">المميزات</a></li>
+    <li><a href="#audience">لمن سِنان؟</a></li>
+    <li><a href="#login">ابدأ الآن</a></li>
+  </ul>
+  <div class="nav-name">سِنان</div>
+  <a href="https://v0-sinanacad.vercel.app/" class="btn-cta">
+    تسجيل الدخول
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+  </a>
+</nav>
+
+<section class="hero fadein">
+  <div>
+    <div class="hero-eyebrow"><span class="pulse"></span>منصة إدارة الأكاديميات الرياضية</div>
+    <h1>أدر أكاديميتك. <em>اكتشف مواهبك.</em></h1>
+    <p>سِنان تمنحك نظاماً متكاملاً لإدارة لاعبيك، متابعة مستوياتهم، وتشغيل أكاديميتك باحترافية — بدلاً من الأوراق والواتساب.</p>
+    <div class="hero-btns">
+      <a href="https://v0-sinanacad.vercel.app/" class="btn-cta" style="padding:.85rem 2rem;font-size:.93rem;">جرّب المنصة مجاناً</a>
+      <button class="btn-outline" onclick="document.getElementById('features').scrollIntoView({behavior:'smooth'})">استكشف المميزات</button>
+    </div>
+    <div class="hero-tags">
+      <span class="htag">إدارة اللاعبين</span>
+      <span class="htag">تقييم الأداء</span>
+      <span class="htag">تحصيل الاشتراكات</span>
+      <span class="htag">بوابة أولياء الأمور</span>
+      <span class="htag">متجر الأكاديمية</span>
+    </div>
+  </div>
+  <div class="mock">
+    <div class="mock-top">
+      <span>لوحة المتابعة — فئة تحت 17</span>
+      <div class="wdots">
+        <div class="wd" style="background:#ff5f57"></div>
+        <div class="wd" style="background:#febc2e"></div>
+        <div class="wd" style="background:#28c840"></div>
+      </div>
+    </div>
+    <div class="mock-body">
+      <div class="m-lbl">تقييم اللاعبين — اليوم</div>
+      <div class="m-rows">
+        <div class="m-row mr-g">
+          <div class="mdot dg"></div>
+          <div style="flex:1"><div class="m-name">محمد العمري</div><div class="m-sub">مهاجم — مستوى ممتاز هذا الأسبوع</div></div>
+          <div class="m-badge bg-g">موهبة واعدة</div>
+        </div>
+        <div class="m-row mr-a">
+          <div class="mdot da"></div>
+          <div style="flex:1"><div class="m-name">سعد الغامدي</div><div class="m-sub">حضور منخفض — 3 غيابات هذا الشهر</div></div>
+          <div class="m-badge bg-a">يحتاج متابعة</div>
+        </div>
+        <div class="m-row mr-r">
+          <div class="mdot dr"></div>
+          <div style="flex:1"><div class="m-name">فهد الدوسري</div><div class="m-sub">اشتراك فبراير غير مدفوع</div></div>
+          <div class="m-badge bg-r">متأخر</div>
+        </div>
+      </div>
+      <div class="m-stats">
+        <div class="ms"><span class="ms-n">47</span><div class="ms-l">لاعب نشط</div></div>
+        <div class="ms"><span class="ms-n">89%</span><div class="ms-l">نسبة الحضور</div></div>
+        <div class="ms"><span class="ms-n">12</span><div class="ms-l">موهبة مُقيَّمة</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="stats-strip reveal">
+  <div class="stats-inner">
+    <div class="stat">
+      <span class="stat-n">126</span>
+      <div class="stat-l">نادٍ متعدد الرياضات في السعودية عام 2024</div>
+      <div class="stat-s">Beyond The Game — SURJ Sports Report, 2024</div>
+    </div>
+    <div class="stat">
+      <span class="stat-n">1300%</span>
+      <div class="stat-l">نمو عدد الأندية منذ 2019 (من 9 إلى 126 نادياً)</div>
+      <div class="stat-s">Beyond The Game — SURJ Sports Report, 2024</div>
+    </div>
+    <div class="stat">
+      <span class="stat-n">$8.5B</span>
+      <div class="stat-l">حجم الصناعة الرياضية السعودية اليوم</div>
+      <div class="stat-s">The Business Year, 2025</div>
+    </div>
+    <div class="stat">
+      <span class="stat-n">149%</span>
+      <div class="stat-l">نمو مشاركة المرأة في الرياضة منذ 2015</div>
+      <div class="stat-s">Beyond The Game — SURJ Sports Report, 2024</div>
+    </div>
+  </div>
+</div>
+
+<section class="sec" id="features">
+  <div class="ctr reveal">
+    <div class="stag">المميزات</div>
+    <h2 class="stitle">كل ما تحتاجه في مكان واحد</h2>
+    <p class="ssub">من تسجيل أول لاعب حتى اكتشاف المواهب وإدارة الإيرادات — سِنان تغطي كل شيء</p>
+  </div>
+  <div class="feat-grid reveal">
+    <div class="feat">
+      <div class="feat-ic"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg></div>
+      <h3>إدارة اللاعبين</h3>
+      <p>ملف شامل لكل لاعب — معلوماته الشخصية، فئته العمرية، مركزه، بياناته الطبية، وكامل تاريخه في الأكاديمية</p>
+    </div>
+    <div class="feat">
+      <div class="feat-ic"><svg viewBox="0 0 24 24"><path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg></div>
+      <h3>الحضور والغياب</h3>
+      <p>تسجيل يومي سريع لكل لاعب مع تقارير شهرية تفصيلية وتنبيه تلقائي عند انخفاض نسبة الحضور</p>
+    </div>
+    <div class="feat">
+      <div class="feat-ic"><svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
+      <h3>تقييم الأداء واكتشاف المواهب</h3>
+      <p>قيّم كل لاعب على مؤشرات رياضية معتمدة كالسرعة والتمرير والتسديد واللياقة، وتتبّع تطوره أسبوعاً بأسبوع</p>
+    </div>
+    <div class="feat">
+      <div class="feat-ic"><svg viewBox="0 0 24 24"><path d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/></svg></div>
+      <h3>تحصيل الاشتراكات بسهولة</h3>
+      <p>إدارة رسوم الاشتراك الشهرية، متابعة المدفوعات، وإشعار تلقائي للمتأخرين — بدون متابعة يدوية أو واتساب</p>
+    </div>
+    <div class="feat">
+      <div class="feat-ic"><svg viewBox="0 0 24 24"><path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg></div>
+      <h3>قائمة المدربين</h3>
+      <p>سجّل مدربيك مع تخصصاتهم والفئات التي يشرفون عليها، وتابع أداءهم بناءً على نتائج لاعبيهم</p>
+    </div>
+    <div class="feat">
+      <div class="feat-ic"><svg viewBox="0 0 24 24"><path d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg></div>
+      <h3>وصول لأولياء الأمور</h3>
+      <p>الأهل يطّلعون على حضور أبنائهم ومستواهم وملاحظات المدرب، ويدفعون الاشتراكات مباشرة من حساباتهم</p>
+    </div>
+    <div class="feat">
+      <div class="feat-ic"><svg viewBox="0 0 24 24"><path d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg></div>
+      <h3>متجر الأكاديمية</h3>
+      <p>بيع المعدات والزي الرياضي وباقات التدريب مباشرة عبر المنصة — مصدر إيراد إضافي لأكاديميتك</p>
+    </div>
+    <div class="feat">
+      <div class="feat-ic"><svg viewBox="0 0 24 24"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg></div>
+      <h3>العقود والوثائق</h3>
+      <p>حفظ العقود وملفات اللاعبين رقمياً بشكل منظم مع تنبيه قبل انتهاء صلاحية أي وثيقة مهمة</p>
+    </div>
+    <div class="feat">
+      <div class="feat-ic"><svg viewBox="0 0 24 24"><path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg></div>
+      <h3>تقارير وإحصائيات</h3>
+      <p>لوحة تحليلية شاملة — الإيرادات، الحضور، أبرز المواهب، واتجاهات التطور في نظرة واحدة</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section class="sec-full" style="background:var(--surface)" id="audience">
+  <div class="sec-in">
+    <div class="ctr reveal">
+      <div class="stag">لمن سِنان؟</div>
+      <h2 class="stitle">لكل من يدير لاعبين</h2>
+      <p class="ssub">سِنان مبنية بواجهات وصلاحيات مختلفة لكل فئة</p>
+    </div>
+    <div class="aud-grid reveal">
+      <div class="aud">
+        <div class="aud-bar"></div>
+        <h3>الأكاديميات الرياضية الخاصة</h3>
+        <p>إدارة احترافية تبني سمعة قوية، تجذب الأهالي، وتنظّم الإيرادات — كل شيء في نظام واحد</p>
+      </div>
+      <div class="aud">
+        <div class="aud-bar" style="background:var(--green)"></div>
+        <h3>أندية الدوري السعودي</h3>
+        <p>تتبع تطور الفئات السنية المتعددة واكتشف المواهب في وقت مبكر قبل أن تضيع فرصتها</p>
+      </div>
+      <div class="aud">
+        <div class="aud-bar" style="background:var(--amber)"></div>
+        <h3>المدربون المستقلون</h3>
+        <p>أدر مجموعاتك التدريبية بأسلوب احترافي وقدّم لأولياء الأمور تقارير تعكس جهدك الحقيقي</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<div class="login-sec" id="login">
+  <div class="login-in reveal">
+    <div class="stag ctr">الدخول للمنصة</div>
+    <h2>اختر نوع حسابك</h2>
+    <p>سِنان تخدم ثلاث فئات بواجهات وصلاحيات مخصصة لكل منها</p>
+    <div class="roles">
+      <div class="role" onclick="pickRole(this)">
+        <div class="role-ic"><svg viewBox="0 0 24 24"><path d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg></div>
+        <h4>إدارة الأكاديمية</h4>
+        <span>مسؤول الأكاديمية أو النادي</span>
+      </div>
+      <div class="role" onclick="pickRole(this)">
+        <div class="role-ic"><svg viewBox="0 0 24 24"><path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg></div>
+        <h4>مدرب</h4>
+        <span>مدرب الفريق أو المجموعة</span>
+      </div>
+      <div class="role" onclick="pickRole(this)">
+        <div class="role-ic"><svg viewBox="0 0 24 24"><path d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg></div>
+        <h4>ولي الأمر</h4>
+        <span>متابعة ابني في الأكاديمية</span>
+      </div>
+    </div>
+    <div class="lform-wrap" id="lform">
+      <div class="lform">
+        <div class="fg">
+          <label>البريد الإلكتروني</label>
+          <input type="email" placeholder="example@sinan.sa" value="admin@sinan.sa">
+        </div>
+        <div class="fg">
+          <label>كلمة المرور</label>
+          <input type="password" value="123456">
+        </div>
+        <a href="https://v0-sinanacad.vercel.app/" class="lbtn">تسجيل الدخول</a>
+        <div class="lhint">للتجربة: admin@sinan.sa / 123456</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <p>© 2026 سِنان — جميع الحقوق محفوظة</p>
+  <div class="f-name">سِنان</div>
+  <p>صُنع في السعودية 🇸🇦</p>
+</footer>
+
+<script>
+const ro=new IntersectionObserver(es=>{es.forEach((e,i)=>{if(e.isIntersecting){setTimeout(()=>e.target.classList.add('on'),i*80);ro.unobserve(e.target);}});},{threshold:.1});
+document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
+function pickRole(el){
+  document.querySelectorAll('.role').forEach(r=>r.classList.remove('sel'));
+  el.classList.add('sel');
+  const w=document.getElementById('lform');
+  w.classList.add('open');
+  setTimeout(()=>w.scrollIntoView({behavior:'smooth',block:'center'}),120);
+}
+</script>
+</body>
+</html>
